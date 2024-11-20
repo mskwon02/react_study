@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios_instance from "../api/axios";
+import MovieModal from "./MovieModal";
 
 export default function Row({ title, id, rUrl, isBig }) {
   const [netfilxOriginalList, setnetfilxOriginalList] = useState([]);
+  const [isClicked, setisClicked] = useState(false);
+  const selectedMovie = useRef("");
   useEffect(() => {
     fetchData();
   }, []);
@@ -11,7 +14,7 @@ export default function Row({ title, id, rUrl, isBig }) {
     const result = await axios_instance.get(rUrl);
     setnetfilxOriginalList(result.data.results);
   };
-  console.log("netflix list", netfilxOriginalList);
+  //console.log("netflix list", netfilxOriginalList);
   return (
     <section className=" pt-16 bg-black">
       <h1 className="text-4xl font-semibold mb-4 ml-8 text-white">{title}</h1>
@@ -30,12 +33,19 @@ export default function Row({ title, id, rUrl, isBig }) {
         >
           {netfilxOriginalList.map((original) => {
             return (
-              <span className="flex-shrink-0 w-1/5 flex flex-col mx-3 ">
+              <span
+                key={original.id}
+                className="flex-shrink-0 w-1/5 flex flex-col mx-3 "
+              >
                 <img
                   src={`https://image.tmdb.org/t/p/original/${
                     isBig ? original.poster_path : original.backdrop_path
                   } `}
                   className="rounded-md hover:scale-[1.1] hover:rounded-md"
+                  onClick={() => {
+                    setisClicked(true);
+                    selectedMovie.current = original;
+                  }}
                 />
                 <span className="text-white font-medium mt-8 overflow-hidden text-xl">
                   {original.title || original.name}
@@ -53,6 +63,13 @@ export default function Row({ title, id, rUrl, isBig }) {
           <span>{">"}</span>
         </div>
       </div>
+
+      {isClicked && (
+        <MovieModal
+          selectedMovie={selectedMovie.current}
+          setisClicked={setisClicked}
+        />
+      )}
     </section>
   );
 }
