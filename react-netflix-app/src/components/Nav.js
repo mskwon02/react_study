@@ -20,7 +20,7 @@ export default function Nav() {
     <nav
       className={`${
         show ? "bg-black" : ""
-      }   fixed w-full h-24 p-10 z-10 flex justify-between items-center ease-in duration-700`}
+      }   fixed w-full h-24 p-10 z-10 flex justify-between items-center ease-in duration-400`}
     >
       <img
         alt="netflix logo"

@@ -31,7 +31,7 @@ function Banner() {
           backgroundPosition: "top center",
           backgroundSize: "cover",
         }}
-        className="h-[650px] object-contain flex flex-col justify-center"
+        className="h-[70vh] object-contain flex flex-col justify-center"
       >
         <div className="p-16 flex flex-col justify-between h-2/3 mt-16">
           <h1 className="text-white font-bold text-6xl">
