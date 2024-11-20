@@ -29,7 +29,7 @@ export default function MovieModal({ selectedMovie, setisClicked }) {
               {selectedMovie.first_air_date || selectedMovie.release_date}
             </span>
           </div>
-          <h1 className="font-extrabold text-3xl text-white">
+          <h1 className="font-extrabold text-4xl text-white">
             {selectedMovie.name || selectedMovie.title}
           </h1>
           <p className="mt-7 text-white text-xl ">{`평점:${selectedMovie.vote_average}`}</p>
